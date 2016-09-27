@@ -8,7 +8,9 @@ Compatible with Linux, Windows 7+, and OSX;
 ```javascript
 var monitor = require('active-window');
 
-callback = function(window){
+callback = function(error, window){
+  if (error) return console.log(error);
+  
   try {
     console.log("App: " + window.app);
     console.log("Title: " + window.title);

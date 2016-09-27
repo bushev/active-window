@@ -4,6 +4,7 @@ var config = getConfig();
 /**
  * This callback handle the response request by getActiveWindow function
  * @callback getActiveWindowCallback
+ * @param {Error} error
  * @param {app: string, window: string} window
  */
 
@@ -34,12 +35,12 @@ exports.getActiveWindow = function(callback,repeats,interval){
 
   //Obtain successful response from script
   ls.stdout.on('data', function(stdout){
-    callback(reponseTreatment(stdout.toString()));
+    callback(null, reponseTreatment(stdout.toString()));
   });
 
   //Obtain error response from script
   ls.stderr.on("data",function(stderr){
-   throw stderr.toString();
+   callback(new Error(stderr));
   });
 
   ls.stdin.end();
