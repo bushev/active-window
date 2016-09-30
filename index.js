@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path');
 var config = getConfig();
 
 /**
@@ -75,8 +76,7 @@ function reponseTreatment(response){
 */
 function getConfig(){
   //Retrieve configs
-  var configs = JSON.parse(fs.readFileSync(__dirname+'/configs.json', 'utf8'));
-  var path = require("path");
+  var configs = JSON.parse(fs.readFileSync(path.resolve(__dirname, '/configs.json'), 'utf8'));
 
   switch(process.platform){
       case 'linux':
