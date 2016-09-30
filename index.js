@@ -55,11 +55,25 @@ class ActiveWindow {
 
             if (err) return callback(err);
 
-            console.log(result);
+            let data = {};
 
-            callback({});
+            if (result[0]) {
+
+                data.application = result[0];
+
+            } else {
+
+                return callback(new Error(`Application name cat't be resolved`));
+            }
+
+            if (result[1]) {
+
+                data.title = result[1];
+            }
+
+            callback(null, data);
         });
     }
 }
 
-module.export = ActiveWindow;
+module.exports = ActiveWindow;
